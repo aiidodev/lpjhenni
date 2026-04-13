@@ -23,6 +23,8 @@
 # misc
 .DS_Store
 *.pem
+# vídeos grandes (não versionar)
+*.mp4
 
 # debug
 npm-debug.log*

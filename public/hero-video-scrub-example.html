@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hero — vídeo scrub (ScrollTrigger)</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #0a0a0a;
+        color: #e8e8e8;
+        font-family: system-ui, sans-serif;
+      }
+      .video-container {
+        position: relative;
+        min-height: 300vh;
+        width: 100%;
+      }
+      .video-container-sticky {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+      }
+      .hero-scrub-video {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+      }
+      .hero-scrub-gradient {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background: linear-gradient(
+          to bottom,
+          rgba(10, 10, 10, 0.35),
+          rgba(10, 10, 10, 0.72),
+          rgba(10, 10, 10, 0.94)
+        );
+      }
+      .content-overlay {
+        position: relative;
+        z-index: 2;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 2rem;
+        pointer-events: none;
+      }
+      .content-overlay a,
+      .content-overlay button {
+        pointer-events: auto;
+      }
+      .after {
+        padding: 4rem 2rem;
+        min-height: 80vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="video-root" class="video-container">
+      <div class="video-container-sticky">
+        <video
+          id="scrub-video"
+          class="hero-scrub-video"
+          src="https://res.cloudinary.com/dgnly766m/video/upload/v1712610214/abstract_tech_bg_on8fjs.mp4"
+          muted
+          playsinline
+          preload="auto"
+        ></video>
+        <div class="hero-scrub-gradient" aria-hidden="true"></div>
+        <div class="content-overlay">
+          <h1>Texto sobre o vídeo</h1>
+          <p>Role a página para avançar o vídeo (scrub).</p>
+        </div>
+      </div>
+    </div>
+    <section class="after">
+      <h2>Conteúdo após o hero</h2>
+    </section>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      const video = document.getElementById("scrub-video");
+      const container = document.getElementById("video-root");
+
+      function setup() {
+        video.pause();
+
+        ScrollTrigger.create({
+          trigger: container,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1,
+          onUpdate: (self) => {
+            const d = video.duration;
+            if (!d || !isFinite(d)) return;
+            video.currentTime = self.progress * d;
+          },
+        });
+      }
+
+      if (video.readyState >= 1) {
+        setup();
+      } else {
+        video.addEventListener("loadedmetadata", setup, { once: true });
+      }
+    </script>
+  </body>
+</html>
