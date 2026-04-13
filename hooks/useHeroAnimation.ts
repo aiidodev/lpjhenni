@@ -48,8 +48,7 @@ export function useHeroAnimation({ rootRef, setupSplitText }: UseHeroAnimationPa
     heroIntroTl
       .fromTo(q(".hero-badge"), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8 })
       .fromTo(q(".hero-sub"), { opacity: 0, y: 42 }, { opacity: 1, y: 0, duration: 0.9 }, "-=0.45")
-      .fromTo(q(".hero-kpi"), { opacity: 0, y: 34 }, { opacity: 1, y: 0, stagger: 0.12, duration: 0.7 }, "-=0.45")
-      .fromTo(q(".hero-button"), { opacity: 0, y: 28, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.7 }, "-=0.3");
+      .fromTo(q(".hero-kpi"), { opacity: 0, y: 34 }, { opacity: 1, y: 0, stagger: 0.12, duration: 0.7 }, "-=0.45");
 
     }, rootRef);
 

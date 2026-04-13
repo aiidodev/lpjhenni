@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 import gsap from "gsap";
 import { Observer, ScrollTrigger } from "gsap/all";
 import {
@@ -21,7 +20,7 @@ import { useHeroAnimation } from "@/hooks/useHeroAnimation";
 import { useLenisScrollTrigger } from "@/hooks/useLenisScrollTrigger";
 import { useMasterScrollTimeline } from "@/hooks/useMasterScrollTimeline";
 import { HeroVideoScrub } from "@/components/landing/HeroVideoScrub";
-import { ThreeScene } from "@/components/ThreeScene";
+import { SketchfabBackground } from "@/components/SketchfabBackground";
 import { BackgroundMusic } from "@/components/landing/BackgroundMusic";
 import { useJosephScrollOrchestration } from "@/hooks/useJosephScrollOrchestration";
 import { useScrollSync } from "@/hooks/useScrollSync";
@@ -209,7 +208,7 @@ export function LandingExperience() {
   return (
     <div ref={rootRef} className="relative min-h-0 overflow-x-hidden bg-transparent text-[var(--page-fg)]">
       <ExperienceLoader visible={loaderVisible} />
-      <ThreeScene progressRef={scrollProgressRef} onReady={() => setThreeReady(true)} />
+      <SketchfabBackground progressRef={scrollProgressRef} onReady={() => setThreeReady(true)} />
       <div data-page-shell className="page-transition-shell relative">
         <div ref={progressRef} className="top-progress scale-x-0" />
         <div className="noise-overlay" />
@@ -265,16 +264,7 @@ export function LandingExperience() {
                 </div>
               ))}
             </div>
-            <motion.a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="hero-button cta-magnetic magnetic-btn interactive-target font-mono-ui mt-2 w-fit rounded-none border border-white/20 bg-transparent px-8 py-4 text-xs uppercase tracking-[0.2em] text-neutral-200"
-              whileHover={{ scale: 1.02 }}
-            >
-              QUERO ESCALAR MINHA OPERAÇÃO COM IA
-            </motion.a>
-            <div className="pointer-events-none mt-16 flex flex-col items-center gap-2 pb-6 md:mt-20">
+            <div className="pointer-events-none mt-16 flex flex-col items-center gap-2 pb-10 md:mt-20">
               <p className="scroll-hint-pulse font-mono-ui text-[10px] uppercase tracking-[0.35em] text-neutral-500">[Scroll]</p>
               <p className="font-mono-ui text-[10px] uppercase tracking-[0.28em] text-neutral-500">para continuar</p>
             </div>

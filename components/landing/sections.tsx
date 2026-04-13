@@ -103,11 +103,11 @@ export function ProblemSection() {
 
 export function SolutionSection() {
   return (
-    <AnimatedSection id="autoridade" className={`${sectionClass} theme-band-light`} pageTheme="light">
-      <p className="bracket-label mb-10 text-neutral-700">[ 2025 - Marco histórico ]</p>
+    <AnimatedSection id="autoridade" className={sectionClass}>
+      <p className="bracket-label mb-10 text-neutral-400">[ 2025 - Marco histórico ]</p>
       <KineticHeading
         as="h3"
-        className="mb-10 max-w-4xl text-[clamp(1.8rem,4vw,3.3rem)] font-semibold leading-[1.04] tracking-[-0.03em] text-neutral-900"
+        className="mb-10 max-w-4xl text-[clamp(1.8rem,4vw,3.3rem)] font-semibold leading-[1.04] tracking-[-0.03em] text-white"
       >
         Se eu pude revolucionar o sistema financeiro, imagine o que posso fazer pelo seu negócio.
       </KineticHeading>
@@ -115,12 +115,12 @@ export function SolutionSection() {
         {timeline.map((item) => (
           <motion.article
             key={item.year}
-            className="luxury-glass luxury-glass--light reactive-card rounded-lg p-8 md:p-10"
+            className="luxury-glass reactive-card rounded-lg p-8 md:p-10"
             whileHover={{ y: -4 }}
           >
-            <p className="font-mono-ui text-xs uppercase tracking-[0.18em] text-neutral-600">{item.year}</p>
-            <h4 className="mb-4 mt-3 text-2xl font-semibold tracking-tight text-neutral-900">{item.title}</h4>
-            <p className="text-base leading-relaxed text-neutral-700">{item.description}</p>
+            <p className="font-mono-ui text-xs uppercase tracking-[0.18em] text-neutral-500">{item.year}</p>
+            <h4 className="mb-4 mt-3 text-2xl font-semibold tracking-tight text-neutral-100">{item.title}</h4>
+            <p className="text-base leading-relaxed text-neutral-400">{item.description}</p>
           </motion.article>
         ))}
       </div>
