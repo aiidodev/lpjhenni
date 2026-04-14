@@ -222,16 +222,27 @@ body {
   pointer-events: auto;
 }
 
-/* Contraste do título sem chapar o hero inteiro (gradiente só em HeroVideoScrub, faixa inferior). */
+/* Vidro por cima do modelo 3D — letras do hero ficam evidentes (texto está em z-index superior). */
+.hero-sketchfab-blur {
+  background: rgba(6, 6, 8, 0.28);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.hero-sketchfab-parallax {
+  transform-origin: center center;
+}
+
+/* Título por cima do vidro — sombra suave para cortar com o blur do fundo. */
 .hero-content-layer .gradient-title {
   text-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.9),
-    0 4px 24px rgba(0, 0, 0, 0.65);
+    0 1px 2px rgba(0, 0, 0, 0.75),
+    0 6px 32px rgba(0, 0, 0, 0.45);
 }
 
 .hero-content-layer .hero-sub,
 .hero-content-layer .bracket-label {
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
 }
 
 .page-transition-shell {
