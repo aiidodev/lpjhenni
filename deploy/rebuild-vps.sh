@@ -46,7 +46,20 @@ pm2 save
 
 echo ""
 echo "=== Local (Node) ==="
-curl -sI --max-time 5 http://127.0.0.1:3000 2>/dev/null | head -5 || echo "(curl falhou — ver: pm2 logs lpjhenni)"
+# O Next demora 1–5s a aceitar ligações após pm2 restart — várias tentativas.
+ok=0
+for i in 1 2 3 4 5 6 7 8 9 10; do
+  if curl -sfI --max-time 3 http://127.0.0.1:3000 >/dev/null 2>&1; then
+    ok=1
+    break
+  fi
+  sleep 1
+done
+if [ "$ok" = "1" ]; then
+  curl -sI --max-time 5 http://127.0.0.1:3000 2>/dev/null | head -5
+else
+  echo "(curl falhou após 10s — o processo pode estar a subir ou com erro: pm2 logs lpjhenni --lines 80)"
+fi
 echo ""
 echo "Pasta do processo (confirma que é $ROOT):"
 pm2 describe lpjhenni 2>/dev/null | grep -E "exec cwd|script path" || true
