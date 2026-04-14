@@ -126,7 +126,7 @@ function PostFX() {
   return (
     <EffectComposer enableNormalPass={false} multisampling={0}>
       <Bloom luminanceThreshold={0.18} intensity={0.42} mipmapBlur radius={0.5} />
-      <Vignette eskil={false} offset={0.18} darkness={0.52} />
+      <Vignette eskil={false} offset={0.12} darkness={0.22} />
       <Noise opacity={0.035} />
     </EffectComposer>
   );
@@ -170,7 +170,7 @@ export type ThreeSceneProps = {
 /** Fundo 3D fullscreen (fixed); HTML por cima com z-index maior. */
 export function ThreeScene({ progressRef, onReady }: ThreeSceneProps) {
   return (
-    <div className="pointer-events-none fixed inset-0 z-[4]" aria-hidden data-three-background>
+    <div className="pointer-events-none fixed inset-0 z-0" aria-hidden data-three-background>
       <Canvas
         gl={{
           antialias: true,

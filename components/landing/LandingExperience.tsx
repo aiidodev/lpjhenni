@@ -27,23 +27,6 @@ import { useScrollSync } from "@/hooks/useScrollSync";
 
 gsap.registerPlugin(ScrollTrigger, Observer);
 
-function setupSplitText(selector: string) {
-  const elements = gsap.utils.toArray<HTMLElement>(selector);
-  elements.forEach((element) => {
-    const text = element.innerText;
-    const hasGradient = element.classList.contains("gradient-title");
-    element.innerHTML = text
-      .split("")
-      .map((char) =>
-        hasGradient
-          ? `<span class="inline-block split-char split-gradient-char">${char === " " ? "&nbsp;" : char}</span>`
-          : `<span class="inline-block split-char">${char === " " ? "&nbsp;" : char}</span>`,
-      )
-      .join("");
-  });
-  return gsap.utils.toArray<HTMLElement>(`${selector} .split-char`);
-}
-
 export function LandingExperience() {
   const defaultCursorLabel = "VIEW PROJECT - VIEW PROJECT - ";
   const rootRef = useRef<HTMLDivElement>(null);
@@ -61,10 +44,7 @@ export function LandingExperience() {
 
   useLenisScrollTrigger();
 
-  useHeroAnimation({
-    rootRef,
-    setupSplitText,
-  });
+  useHeroAnimation({ rootRef });
   useMasterScrollTimeline({ rootRef, progressRef });
   useJosephScrollOrchestration({ rootRef, active: !loaderVisible });
 
@@ -209,7 +189,7 @@ export function LandingExperience() {
     <div ref={rootRef} className="relative min-h-0 w-full min-w-0 flex-1 overflow-x-hidden bg-transparent text-[var(--page-fg)]">
       <ExperienceLoader visible={loaderVisible} />
       <ThreeScene progressRef={scrollProgressRef} onReady={() => setThreeReady(true)} />
-      <div data-page-shell className="page-transition-shell relative">
+      <div data-page-shell className="page-transition-shell relative z-10 isolate">
         <div ref={progressRef} className="top-progress scale-x-0" />
         <div className="noise-overlay" />
         <BackgroundMusic />
@@ -251,7 +231,7 @@ export function LandingExperience() {
             <span className="hero-badge bracket-label w-fit border border-white/10 bg-white/[0.02] px-4 py-2">
               [ Jhenni Nascimento // Engenheira de Software ]
             </span>
-            <h1 className="hero-headline gradient-title max-w-[min(100%,56rem)] text-[clamp(2.5rem,6vw,5.75rem)] font-semibold leading-[0.92] tracking-[-0.04em] md:max-w-6xl">
+            <h1 className="hero-headline gradient-title max-w-[min(100%,56rem)] overflow-visible text-[clamp(2.5rem,6vw,5.75rem)] font-semibold leading-[1.02] tracking-tight md:max-w-6xl">
               Eu projeto os sistemas que tornam a sua concorrência obsoleta.
             </h1>
             <p className="hero-sub max-w-2xl text-lg font-medium leading-snug text-neutral-300 md:text-2xl md:leading-snug">

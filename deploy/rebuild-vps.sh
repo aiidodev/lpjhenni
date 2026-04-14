@@ -22,6 +22,7 @@ fi
 npm install --include=dev
 
 export NODE_ENV=production
+export GIT_COMMIT="$(git rev-parse --short HEAD 2>/dev/null || echo unknown)"
 npm run build
 
 start_or_restart() {

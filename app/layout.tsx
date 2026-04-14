@@ -26,7 +26,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${syne.variable} ${jetbrainsMono.variable} h-full antialiased`}>
+    <html
+      lang="pt-BR"
+      data-lp-rev="hero-headline-no-split-v2"
+      className={`${syne.variable} ${jetbrainsMono.variable} h-full antialiased`}
+    >
       <body className="min-h-full flex flex-col bg-[var(--page-bg)] text-[var(--page-fg)]">{children}</body>
     </html>
   );
