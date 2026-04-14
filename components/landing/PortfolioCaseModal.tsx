@@ -41,7 +41,7 @@ export function PortfolioCaseModal({ item, onClose }: Props) {
           role="dialog"
           aria-modal="true"
           aria-labelledby="portfolio-modal-title"
-          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-8"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-[max(0.75rem,env(safe-area-inset-top))] sm:p-6 md:p-8"
           style={{ isolation: "isolate" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -55,32 +55,43 @@ export function PortfolioCaseModal({ item, onClose }: Props) {
             onClick={onClose}
           />
           <motion.div
-            className="relative z-10 flex w-full max-w-5xl flex-col overflow-hidden rounded-lg border border-white/20 bg-[#111] shadow-2xl"
-            style={{ maxHeight: "min(92vh, 900px)" }}
+            className="relative z-10 flex h-[min(92dvh,900px)] w-full max-h-[92dvh] min-h-0 max-w-5xl flex-col overflow-hidden rounded-lg border border-white/20 bg-[#111] shadow-2xl"
             initial={{ scale: 0.97, y: 16 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.98, y: 10 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative w-full shrink-0 bg-black/50" style={{ aspectRatio: "16 / 10" }}>
+            <div className="relative aspect-[16/10] w-full max-h-[min(38vh,300px)] shrink-0 overflow-hidden bg-black/50 sm:max-h-[min(42vh,360px)]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={item.coverSrc}
                 alt={`Preview ${item.name}`}
-                className="absolute inset-0 h-full w-full object-cover object-top"
+                className="h-full w-full object-cover object-top"
                 draggable={false}
                 referrerPolicy="no-referrer"
               />
             </div>
-            <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto p-6 text-left md:gap-4 md:p-8">
-              <p className="font-mono-ui text-[10px] uppercase tracking-[0.2em] text-neutral-400">{item.site}</p>
-              <h2 id="portfolio-modal-title" className="text-2xl font-semibold tracking-tight text-white md:text-3xl">
+            <div className="modal-project-body flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto overflow-x-hidden overscroll-y-contain p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] text-left [-webkit-overflow-scrolling:touch] md:gap-4 md:p-8">
+              <p className="font-mono-ui shrink-0 text-[10px] uppercase tracking-[0.2em] text-neutral-400">{item.site}</p>
+              <h2 id="portfolio-modal-title" className="shrink-0 text-2xl font-semibold tracking-tight text-white md:text-3xl">
                 {item.name}
               </h2>
-              <p className="font-mono-ui text-[11px] uppercase tracking-[0.16em] text-neutral-500">{item.preview}</p>
-              <p className="text-base leading-relaxed text-neutral-300">{item.description}</p>
-              <div className="flex flex-wrap gap-2">
+              <p className="font-mono-ui shrink-0 text-[11px] uppercase tracking-[0.16em] text-neutral-500">{item.preview}</p>
+              <p className="shrink-0 text-base leading-relaxed text-neutral-300">{item.description}</p>
+              {item.metrics.length > 0 ? (
+                <ul className="flex shrink-0 flex-wrap gap-2">
+                  {item.metrics.map((m) => (
+                    <li
+                      key={m}
+                      className="border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 font-mono-ui text-[10px] uppercase tracking-[0.12em] text-emerald-200/90"
+                    >
+                      {m}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+              <div className="flex shrink-0 flex-wrap gap-2">
                 {item.stack.map((tag) => (
                   <span
                     key={tag}
@@ -90,7 +101,7 @@ export function PortfolioCaseModal({ item, onClose }: Props) {
                   </span>
                 ))}
               </div>
-              <div className="mt-4 flex flex-col gap-3 sm:mt-6 sm:flex-row sm:justify-end">
+              <div className="mt-auto flex shrink-0 flex-col gap-3 border-t border-white/10 pt-5 sm:flex-row sm:justify-end sm:pt-6">
                 <button
                   type="button"
                   onClick={onClose}
