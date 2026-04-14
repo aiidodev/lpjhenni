@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      data-lp-rev="hero-sketchfab-parallax-v1"
+      data-lp-rev="sketchfab-global-bg-blur-v1"
       className={`${syne.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[var(--page-bg)] text-[var(--page-fg)]">{children}</body>

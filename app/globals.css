@@ -202,6 +202,14 @@ body {
   overflow-y: visible;
 }
 
+/* Hero só com conteúdo — fundo Sketchfab é global */
+.video-container-sticky.video-container-hero-only {
+  position: relative;
+  height: auto;
+  min-height: 100vh;
+  background: transparent;
+}
+
 /* Sketchfab: cobrir viewport sem “caixa” preta — zoom leve no iframe */
 .sketchfab-embed-wrapper {
   contain: layout style;
@@ -232,16 +240,16 @@ body {
   display: block;
 }
 
-/* Camada escura + blur por cima do 3D — copy legível */
-.hero-sketchfab-text-shroud {
+/* Blur fixo em toda a viewport: fundo 3D fica suave; texto no main (z maior) fica nítido */
+.sketchfab-page-blur-layer {
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.52) 0%,
-    rgba(0, 0, 0, 0.28) 42%,
-    rgba(0, 0, 0, 0.45) 100%
+    rgba(6, 6, 8, 0.62) 0%,
+    rgba(6, 6, 8, 0.48) 35%,
+    rgba(8, 8, 10, 0.55) 100%
   );
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(24px) saturate(1.05);
+  -webkit-backdrop-filter: blur(24px) saturate(1.05);
 }
 
 /* Faixa inferior só — zero overlay em cima do headline */
@@ -250,12 +258,15 @@ body {
 }
 
 .content-overlay {
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+}
+
+main[data-landing-main] {
+  text-rendering: optimizeLegibility;
 }
 
 .page-transition-shell {
   min-height: 100%;
-  background-color: #0a0a0a;
   opacity: 1;
 }
 

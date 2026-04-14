@@ -20,7 +20,7 @@ import { useHeroAnimation } from "@/hooks/useHeroAnimation";
 import { useLenisScrollTrigger } from "@/hooks/useLenisScrollTrigger";
 import { useMasterScrollTimeline } from "@/hooks/useMasterScrollTimeline";
 import { HeroVideoScrub } from "@/components/landing/HeroVideoScrub";
-import { ThreeScene } from "@/components/ThreeScene";
+import { SketchfabScrollBackground } from "@/components/landing/SketchfabScrollBackground";
 import { BackgroundMusic } from "@/components/landing/BackgroundMusic";
 import { useJosephScrollOrchestration } from "@/hooks/useJosephScrollOrchestration";
 import { useScrollSync } from "@/hooks/useScrollSync";
@@ -188,8 +188,14 @@ export function LandingExperience() {
   return (
     <div ref={rootRef} className="relative min-h-0 w-full min-w-0 flex-1 overflow-x-hidden bg-transparent text-[var(--page-fg)]">
       <ExperienceLoader visible={loaderVisible} />
-      <ThreeScene progressRef={scrollProgressRef} onReady={() => setThreeReady(true)} />
-      <div data-page-shell className="page-transition-shell relative z-10 isolate">
+      <div data-page-shell className="page-transition-shell relative z-10 isolate bg-transparent">
+        <SketchfabScrollBackground
+          rootRef={rootRef}
+          onReady={() => {
+            setVideoReady(true);
+            setThreeReady(true);
+          }}
+        />
         <div ref={progressRef} className="top-progress scale-x-0" />
         <div className="noise-overlay" />
         <BackgroundMusic />
@@ -225,9 +231,12 @@ export function LandingExperience() {
         </div>
       </header>
 
-      <main className="relative z-[30] w-full min-w-0 bg-transparent">
+      <main
+        data-landing-main
+        className="relative z-[30] w-full min-w-0 bg-transparent text-[var(--page-fg)] antialiased"
+      >
         <section id="hero" className="hero-layer relative isolate w-full max-w-none overflow-hidden">
-          <HeroVideoScrub onReady={() => setVideoReady(true)}>
+          <HeroVideoScrub>
             <span className="hero-badge bracket-label w-fit border border-white/10 bg-white/[0.02] px-4 py-2">
               [ Jhenni Nascimento // Engenheira de Software ]
             </span>
